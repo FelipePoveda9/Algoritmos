@@ -37,10 +37,10 @@ public:
 
     void EnqueueMultiple() {
         int n;
+        int valor;
         cout << "¿Cuántos personas hay en espera?: \n";
         cin >> n;
         for (int i = 0; i < n; i++) {
-            int valor;
             cout << "Persona (" << i + 1 << ")" << ": \n";
             cout << "Tiempo de espera persona (" << i + 1 <<"): \n" ;
             cin >> valor;
@@ -51,7 +51,7 @@ public:
         int a;
         for (int i = 0; i < n; i++) {
             a = n - i;
-            cout << "Persona (" << i + 1 << ") atendida, tiempo de espera nuevo (" << a << ")\n";
+            cout << "Persona (" << i + 1 << ") atendida, tiempo de espera nuevo (" << valor << ")\n";
         }
     }
 
