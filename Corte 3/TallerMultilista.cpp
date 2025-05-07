@@ -22,7 +22,7 @@ public:
         return frente == nullptr;
     }
 
-    void encolar(const string& placa) {
+    void encolar(const string placa) {
         NodoCola* nuevo = new NodoCola{placa, nullptr};
         if (estaVacia()) {
             frente = final = nuevo;
@@ -89,7 +89,7 @@ public:
         return cima == nullptr;
     }
 
-    void push(const string& placa) {
+    void push(const string placa) {
         NodoPila* nuevo = new NodoPila{placa, cima};
         cima = nuevo;
     }
@@ -163,23 +163,23 @@ struct Ciudad {
 };
 
 // Prototipos de funciones
-void agregarCiudad(Ciudad*& cabeza, const string& nombre);
-void agregarParqueadero(Ciudad* cabeza, const string& nombreCiudad, const string& nombreParqueadero);
-void agregarZona(Ciudad* cabeza, const string& nombreCiudad, const string& nombreParqueadero, const string& nombreZona, int capacidad);
-Ciudad* buscarCiudad(Ciudad* cabeza, const string& nombre);
-Parqueadero* buscarParqueadero(Parqueadero* cabeza, const string& nombre);
-Zona* buscarZona(Zona* cabeza, const string& nombre);
-void registrarVehiculo(Zona* zona, const string& placa);
+void agregarCiudad(Ciudad*& cabeza, const string nombre); // Paso direccion de  de memoria
+void agregarParqueadero(Ciudad* cabeza, const string nombreCiudad, const string nombreParqueadero); // Paso el puntero cabeza de la ciudad
+void agregarZona(Ciudad* cabeza, const string nombreCiudad, const string nombreParqueadero, const string nombreZona, int capacidad);
+Ciudad* buscarCiudad(Ciudad* cabeza, const string nombre);
+Parqueadero* buscarParqueadero(Parqueadero* cabeza, const string nombre);
+Zona* buscarZona(Zona* cabeza, const string nombre);
+void registrarVehiculo(Zona* zona, const string placa);
 void deshacerUltimo(Zona* zona);
 void atenderCola(Zona* zona);
 void agregarCiudadConParqueaderos(Ciudad*& cabeza);
-void agregarZonasAParqueadero(Ciudad* ciudades, Parqueadero* parqueadero, const string& nombreCiudad);
+void agregarZonasAParqueadero(Ciudad* ciudades, Parqueadero* parqueadero, const string nombreCiudad);
 void liberarMemoria(Ciudad*& cabeza);
 void mostrarTodo(Ciudad* cabeza);
 void mostrarMenu();
 
 
-void agregarCiudad(Ciudad*& cabeza, const string& nombre) {
+void agregarCiudad(Ciudad*& cabeza, const string nombre) {
     Ciudad* nuevaCiudad = new Ciudad;
     nuevaCiudad->nombre = nombre;
     nuevaCiudad->sig = nullptr;
@@ -197,7 +197,7 @@ void agregarCiudad(Ciudad*& cabeza, const string& nombre) {
     cout << "Ciudad '" << nombre << "' agregada correctamente." << endl;
 }
 
-void agregarParqueadero(Ciudad* cabeza, const string& nombreCiudad, const string& nombreParqueadero) {
+void agregarParqueadero(Ciudad* cabeza, const string nombreCiudad, const string nombreParqueadero) {
     Ciudad* ciudad = buscarCiudad(cabeza, nombreCiudad);
     if (!ciudad) {
         cout << "Ciudad no encontrada." << endl;
@@ -221,7 +221,7 @@ void agregarParqueadero(Ciudad* cabeza, const string& nombreCiudad, const string
     cout << "Parqueadero '" << nombreParqueadero << "' agregado a '" << nombreCiudad << "' correctamente." << endl;
 }
 
-void agregarZona(Ciudad* cabeza, const string& nombreCiudad, const string& nombreParqueadero, const string& nombreZona, int capacidad) {
+void agregarZona(Ciudad* cabeza, const string nombreCiudad, const string nombreParqueadero, const string nombreZona, int capacidad) {
     Ciudad* ciudad = buscarCiudad(cabeza, nombreCiudad);
     if (!ciudad) {
         cout << "Ciudad no encontrada." << endl;
@@ -253,7 +253,7 @@ void agregarZona(Ciudad* cabeza, const string& nombreCiudad, const string& nombr
     cout << "Zona '" << nombreZona << "' con capacidad " << capacidad << " agregada a '" << nombreParqueadero << "' correctamente." << endl;
 }
 
-Ciudad* buscarCiudad(Ciudad* cabeza, const string& nombre) {
+Ciudad* buscarCiudad(Ciudad* cabeza, const string nombre) {
     Ciudad* actual = cabeza;
     while (actual) {
         if (actual->nombre == nombre) {
@@ -264,7 +264,7 @@ Ciudad* buscarCiudad(Ciudad* cabeza, const string& nombre) {
     return nullptr;
 }
 
-Parqueadero* buscarParqueadero(Parqueadero* cabeza, const string& nombre) {
+Parqueadero* buscarParqueadero(Parqueadero* cabeza, const string nombre) {
     Parqueadero* actual = cabeza;
     while (actual) {
         if (actual->nombre == nombre) {
@@ -275,7 +275,7 @@ Parqueadero* buscarParqueadero(Parqueadero* cabeza, const string& nombre) {
     return nullptr;
 }
 
-Zona* buscarZona(Zona* cabeza, const string& nombre) {
+Zona* buscarZona(Zona* cabeza, const string nombre) {
     Zona* actual = cabeza;
     while (actual) {
         if (actual->nombre == nombre) {
@@ -286,7 +286,7 @@ Zona* buscarZona(Zona* cabeza, const string& nombre) {
     return nullptr;
 }
 
-void registrarVehiculo(Zona* zona, const string& placa) {
+void registrarVehiculo(Zona* zona, const string placa) {
     if (zona->ocupados < zona->capacidad) {
         Vehiculo* nuevoVehiculo = new Vehiculo;
         nuevoVehiculo->placa = placa;
@@ -386,7 +386,7 @@ void agregarCiudadConParqueaderos(Ciudad*& cabeza) {
     }
 }
 
-void agregarZonasAParqueadero(Ciudad* ciudades, Parqueadero* parqueadero, const string& nombreCiudad) {
+void agregarZonasAParqueadero(Ciudad* ciudades, Parqueadero* parqueadero, const string nombreCiudad) {
     int numZonas;
     cout << "¿Cuántas zonas tiene el parqueadero " << parqueadero->nombre << "? ";
     cin >> numZonas;
