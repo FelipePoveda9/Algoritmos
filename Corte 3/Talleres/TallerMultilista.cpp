@@ -6,7 +6,7 @@ using namespace std;
 
 // Implementación de Cola personalizada
 class Cola {
-private:
+private: 
     struct NodoCola {
         string placa;
         NodoCola* sig;

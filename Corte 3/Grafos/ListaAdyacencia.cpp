@@ -57,7 +57,6 @@ void lista_adyacencia_string(){
         }
         cout << endl;
     }
-
 }
 
 int main() {
